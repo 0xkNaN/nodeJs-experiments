@@ -1,8 +1,0 @@
-
-Routing
-  # app.get(path, callback)
-    > path can be a string
-    > path can be a regEx
-  # app.get('/param?', callback)
-    > param is optional
-  # app.get()
