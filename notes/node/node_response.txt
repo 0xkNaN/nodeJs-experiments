@@ -1,0 +1,78 @@
+
+# http.ServerResponse
+  > This object is created internally by the server --not by the user
+  > It is passed as the second params to the 'request' event
+  > The response implement, but does not inherit form, the 'Writable Stream'interface
+  > This an 'EventEmitter' that has thos events and methods :
+
+    # Event 'close'
+      > Indicates that the underlying connection was terminated
+        before res.end() was called or able to flush
+    # Event 'finish'
+      > Emitted when the response has been sent. More specifically, this event
+        is emitted whent the last segment of the response headers and body has
+        been handed off to the operating system for transmission over the
+        network. It does not imply that the client has received anything yet
+     > After this event, no more event will be emitted on the response object
+
+    # res.statusCode
+        > this property controls the status code that will be sent to the client
+          when the header get flushed
+    #res.statusMessage
+      > this property controls the status message that will be sent to the client
+        when the header get flushed.
+    # res.writeHead(statusCode[, statusMessage][, headers])
+      > Using this method, we can't get headers info.
+      > this method send the headers
+    # res.setHeader(name, value)
+      > name is the name of the new header
+      > value can be a list of
+      > we can't use this method after using res.writeHead()
+      > any header have been set with this method is added to res.writeHead
+    # res.getHeader(name)
+      > Reads out a header that is already been queued but not sent to the client
+      > name is case insensitive
+    # res.getHeaders()
+      > Returns a shallow copy of the current outgoing headers.
+    # res.getHeadersName()
+      > this method return a list of headers
+    # res.hasHeader(name)
+      > Boolean indicates if the this header is exist
+    # res.removeHeader(name)
+          > this method remove a header for implicit sending
+    # res.headersSent
+      > Boolean indicates if the headers has been sent
+      > false => before res.write() if res.writeHead() is not defined
+      > true  => after res.write() if res.writeHead() is not defined
+
+    # res.sendDate
+      > Defaults to true
+      > this should be disabled only for testing
+      > if this set to false the client will not get the date of the server
+      > Automatically generated and sent in the response
+    # res.addTrailers(headers)
+      > this method adds Http header at the end of the message
+
+    # res.setTimeout(msecs[, callback])
+      > Set the timeout value using msecs
+      > If a callback is provided then a it is added as an event listener ou the 'timeout' on the response object
+      > if no timeout is added to the the request, response or the server, then the socket is destroyed when they
+        timeout
+      > if a handler is assigned to the response, request or the server, timed out socket must be handled explicitly.
+
+    # res.socket
+
+    # res.connection
+
+    # res.write(chunk[, endcoding][, callback])
+      > If this method has been called and res.writeHead() has not been called, it will switch to implicit
+        header mode and flush the implicit headers
+      > This method send a chunk of the body
+      > this method ay called multiple times to provide successive parts of the body
+    # res.writeContinue()
+    # res.end([data][,encoding][,callback])
+      > this method signals to the server that all of the responses headers and body has been sent
+      > this method should be called on each responses
+    # res.finished
+      > this  indicates whether the response has completed. Starts as false.
+        After response.end() executes, the value will be true.
