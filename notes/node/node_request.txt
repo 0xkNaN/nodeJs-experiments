@@ -1,0 +1,4 @@
+
+# http.ServerRequest
+  > this object is created internally and returned from http.request()
+  > it presents an in-progress request whose headers

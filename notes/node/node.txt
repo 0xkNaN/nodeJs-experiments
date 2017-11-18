@@ -1,0 +1,72 @@
+
+
+
+*) Data Types
+  *) Buffer
+    > Buffers are instance of Buffer Constructor
+    > Buffer Object is a global Object so we don't need to export it using require('')
+
+
+#) Streams
+  > A stream is an "infinite" flow of data, it is the opposite of an array which will have a predefined size.
+  > With a stream, you don't know when the "data" will stop flowing
+  > A file can be read as a stream or loaded in memory, but the when you open it as a stream
+    there won't be a way to determine how big it is.
+
+  > A Socket is purely a stream... you don't know how much "data" you will get
+  > The "data" will be buffered until it reaches a point where the system will pass it to your code
+    so you can do something else.
+
+  > The amount of data will depend on the network card, operating system, the speed of data comes in, ...
+
+  > This mean that you work with a subset of all information
+  > It's important to understand that your "data" will be split into pieces and it will be up to you
+    to recombine it into something that makes sense.
+
+
+#) Pipe Concept
+  > We use pipes to pass the results of a function to the next
+
+
+*) PROCESS
+  > process is a global object that provide information about the current NodeJs process.
+  > As a global, it is always available to NodeJs without using require('')
+
+  > process.argv => is an array of [node path, file path, arguments...]
+
+
+*) File System
+  > File I/O is provided y simple wrapper around standard POSIX functions.
+  > To use this module we need to require('fs')
+  > All methods have asynchronous (non-blocking) and synchronous (blocking) forms
+      # Reading Files
+        > fs.readFile('path/file', 'encoding', callback(err, data))
+
+
+*) HTTP
+  # require('http')
+  > HTTP interfaces are designed to support many features of the protocol.
+  > The interface is careful to never use the entire request or responses -- the uses is able to stream data.
+  > In order to support the full spectrum of possible HTTP applications. Node's HTTP API is very low-level
+  > It deals with stream handling and message parsing only.
+  > It parses a message into headers and body but it does not parse the actual headers and body
+  > HTTP messages headers are presented by an object.
+
+  # http.agent
+    > An agent is responsible for managing connection persistence and reuse for clients
+    > It maintains a queue of pending requests for a giving host and port
+    >
+
+  # http.createServer([requestListener])
+    > returns an instance of of http.Server
+    > requestListener is a function which is automatically added to the 'request' even.
+
+
+
+
+  # http.get(options[, callback])
+    > options are the same as http.request()
+    > method always set to GET
+    > return http.ClientRequest
+    > Most request are Get request without bodies
+    > callback is invoked with a single param which is an instance of http.IncomingMessage
